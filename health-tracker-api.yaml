@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Health Tracker API
+  description: This API provides endpoints for Health Tracker App
+  contact:
+    name: Ashika Hussain
+    email: ashikahussain111@gmail.com
+paths:
+  /api/users/{user-id}:
+    get:
+      parameters:
+        - in: path
+          name: user-id
+          required: true
+          schema:
+            type: integer
+            example: 3232
+      responses:
+        200:
+          description: This is a specific user in the app
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 3232
+                  name:
+                    type: string
+                    example: Joe Soap
+                  email:
+                    type: string
+                    example: joe@soap.com
+    delete:
+      parameters:
+        - in: path
+          name: user-id
+          required: true
+          schema:
+            type: integer
+            example: 3232
+      responses:
+        200:
+          description: The user has been deleted
+    patch:
+      parameters:
+        - in: path
+          name: user-id
+          required: true
+          schema:
+            type: integer
+            example: 3232
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Joe Soap
+                email:
+                  type: string
+                  example: joe@soap.com
+      responses:
+        200:
+          description: This is a to update a specific user in the app
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 3232
+                  name:
+                    type: string
+                    example: Joe Soap
+                  email:
+                    type: string
+                    example: joe@soap.com
+  /api/users:
+    post:
+      description: Add a user to the app
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 3232
+                name:
+                  type: string
+                  example: Joe Soap
+                email:
+                  type: string
+                  example: joe@soap.com
+      responses:
+        200:
+          description: The user has been created
+    get:
+      responses:
+        200:
+          description: This is a list of the users in the app
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      example: 3232
+                    name:
+                      type: string
+                      example: Joe Soap
+                    email:
+                      type: string
+                      example: joe@soap.com
+  /api/users/email/{email}:
+    get:
+      parameters:
+        - in: path
+          name: email
+          required: true
+          schema:
+            type: string
+            example: joe@soap.com
+      responses:
+        200:
+          description: This is a specific user in the app using email id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 3232
+                  name:
+                    type: string
+                    example: Joe Soap
+                  email:
+                    type: string
+                    example: joe@soap.com
