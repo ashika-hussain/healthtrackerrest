@@ -40,7 +40,7 @@ class UserDAOTest {
                 val userDAO = populateUserTable()
 
                 //Act & Assert
-                assertEquals(3, userDAO.getAll().size)
+                assertEquals(3, userDAO.getAllUsers().size)
             }
         }
         @Test
@@ -72,7 +72,7 @@ class UserDAOTest {
                 val userDAO = UserDAO()
 
                 //Act & Assert
-                assertEquals(0, userDAO.getAll().size)
+                assertEquals(0, userDAO.getAllUsers().size)
             }
         }
 
@@ -111,7 +111,7 @@ class UserDAOTest {
                 val userDAO = populateUserTable()
 
                 //Act & Assert
-                assertEquals(3, userDAO.getAll().size)
+                assertEquals(3, userDAO.getAllUsers().size)
                 assertEquals(user1, userDAO.findById(user1.id))
                 assertEquals(user2, userDAO.findById(user2.id))
                 assertEquals(user3, userDAO.findById(user3.id))
@@ -147,7 +147,7 @@ class UserDAOTest {
                 val user4Updated = User(4, "new username", "new@email.ie")
                 userDAO.update(4, user4Updated)
                 assertEquals(null, userDAO.findById(4))
-                assertEquals(3, userDAO.getAll().size)
+                assertEquals(3, userDAO.getAllUsers().size)
             }
         }
     }
@@ -162,9 +162,9 @@ class UserDAOTest {
               val userDAO = populateUserTable()
 
               //Act & Assert
-              assertEquals(3, userDAO.getAll().size)
+              assertEquals(3, userDAO.getAllUsers().size)
               userDAO.delete(4)
-              assertEquals(3, userDAO.getAll().size)
+              assertEquals(3, userDAO.getAllUsers().size)
           }
       }
 
@@ -176,9 +176,9 @@ class UserDAOTest {
               val userDAO = populateUserTable()
 
               //Act & Assert
-              assertEquals(3, userDAO.getAll().size)
+              assertEquals(3, userDAO.getAllUsers().size)
               userDAO.delete(user3.id)
-              assertEquals(2, userDAO.getAll().size)
+              assertEquals(2, userDAO.getAllUsers().size)
           }
       }
   }

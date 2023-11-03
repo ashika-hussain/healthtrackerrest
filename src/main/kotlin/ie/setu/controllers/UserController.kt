@@ -9,37 +9,57 @@ object UserController {
     private val userDao = UserDAO()
 
     fun getAllUsers(ctx: Context) {
-        ctx.json(userDao.getAll())
+        val users = userDao.getAllUsers()
+        if (users.size != 0) {
+            ctx.status(200)
+        }
+        else{
+            ctx.status(404)
+        }
+        ctx.json(users)
     }
 
     fun getUserByUserId(ctx: Context) {
         val user = userDao.findById(ctx.pathParam("user-id").toInt())
         if (user != null) {
             ctx.json(user)
+            ctx.status(200)
+        }
+        else {
+            ctx.status(404)
         }
     }
 
     fun addUser(ctx: Context) {
         val user : User = jsonToObject(ctx.body())
-        userDao.save(user)
+        val userId = userDao.save(user)
+        user.id = userId
         ctx.json(user)
+        ctx.status(201)
     }
     fun getUserByEmail(ctx: Context){
         val user = userDao.findByEmail(ctx.pathParam("email"))
         if (user!=null) {
             ctx.json(user)
+            ctx.status(200)
+        }
+        else{
+            ctx.status(404)
         }
     }
 
     fun deleteUser(ctx: Context){
-        userDao.delete(ctx.pathParam("user-id").toInt())
+        if (userDao.delete(ctx.pathParam("user-id").toInt()) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
     }
 
     fun updateUser(ctx: Context){
-        val user : User = jsonToObject(ctx.body())
-        userDao.update(
-            id = ctx.pathParam("user-id").toInt(),
-            user = user
-        )
+        val foundUser : User = jsonToObject(ctx.body())
+        if ((userDao.update(id = ctx.pathParam("user-id").toInt(), user=foundUser)) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
     }
 }
