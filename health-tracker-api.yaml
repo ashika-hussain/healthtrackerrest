@@ -7,8 +7,62 @@ info:
     name: Ashika Hussain
     email: ashikahussain111@gmail.com
 paths:
+  /api/users:
+    post:
+      description: Add a user to the app
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 3232
+                name:
+                  type: string
+                  example: Joe Soap
+                email:
+                  type: string
+                  example: joe@soap.com
+      responses:
+        200:
+          description: The user has been created
+    get:
+      summary: Retrieve all users
+      responses:
+        200:
+          description: This is a list of the users in the app
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      example: 3232
+                    name:
+                      type: string
+                      example: Joe Soap
+                    email:
+                      type: string
+                      example: joe@soap.com
+    delete:
+        summary: Delete a User
+        parameters:
+          - in: path
+            name: user-id
+            required: true
+            schema:
+              type: integer
+              example: 3232
+        responses:
+          200:
+            description: The user has been deleted
   /api/users/{user-id}:
     get:
+      summary: Get user by User Id
       parameters:
         - in: path
           name: user-id
@@ -33,18 +87,8 @@ paths:
                   email:
                     type: string
                     example: joe@soap.com
-    delete:
-      parameters:
-        - in: path
-          name: user-id
-          required: true
-          schema:
-            type: integer
-            example: 3232
-      responses:
-        200:
-          description: The user has been deleted
     patch:
+      summary: Update User
       parameters:
         - in: path
           name: user-id
@@ -81,48 +125,22 @@ paths:
                   email:
                     type: string
                     example: joe@soap.com
-  /api/users:
-    post:
-      description: Add a user to the app
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: integer
-                  example: 3232
-                name:
-                  type: string
-                  example: Joe Soap
-                email:
-                  type: string
-                  example: joe@soap.com
+    delete:
+      summary: Delete user by ID
+      operationId: deleteUser
+      parameters:
+        - in: path
+          name: user-id
+          schema:
+            type: string
+          required: true
+          description: ID of the user
       responses:
         200:
-          description: The user has been created
-    get:
-      responses:
-        200:
-          description: This is a list of the users in the app
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  properties:
-                    id:
-                      type: integer
-                      example: 3232
-                    name:
-                      type: string
-                      example: Joe Soap
-                    email:
-                      type: string
-                      example: joe@soap.com
+          description: User deleted successfully
   /api/users/email/{email}:
     get:
+      summary: Get User by Email Id
       parameters:
         - in: path
           name: email
@@ -147,3 +165,126 @@ paths:
                   email:
                     type: string
                     example: joe@soap.com
+  /api/activities:
+    get:
+      summary: Retrieve all activities
+      operationId: getAllActivities
+      responses:
+        '200':
+          description: A list of activities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      example: 3232
+                    description:
+                      type: string
+                      example: Walking
+                    duration:
+                      type: number
+                      format: double
+                      example: 34.0
+                    started:
+                      type: string
+                      format: date-time
+                      example: joe@soap.com
+                    calories:
+                      type: integer
+                      example: 800
+    post:
+      summary: Add a new activity
+      operationId: addActivity
+      requestBody:
+        description: Activity object that needs to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 3232
+                description:
+                  type: string
+                  example: Walking
+                duration:
+                  type: number
+                  format: double
+                  example: 34.0
+                started:
+                  type: string
+                  format: date-time
+                  example: joe@soap.com
+                calories:
+                  type: integer
+                  example: 800
+      responses:
+        '200':
+          description: Activity added successfully
+  /api/activities/{activity-id}:
+      get:
+        summary: Get activity by ID
+        operationId: getActivitiesByActivityId
+        parameters:
+          - in: path
+            name: activity-id
+            schema:
+              type: string
+            required: true
+            description: ID of the activity
+        responses:
+          '200':
+            description: Activity found
+      delete:
+        summary: Delete activity by ID
+        operationId: deleteActivityByActivityId
+        parameters:
+          - in: path
+            name: activity-id
+            schema:
+              type: string
+            required: true
+            description: ID of the activity
+        responses:
+          '200':
+            description: Activity deleted successfully
+      patch:
+        summary: Update activity by ID
+        operationId: updateActivity
+        parameters:
+          - in: path
+            name: activity-id
+            schema:
+              type: integer
+            required: true
+            description: ID of the activity
+        requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                      example: Walking
+                    duration:
+                      type: number
+                      format: double
+                      example: 34.0
+                    started:
+                      type: string
+                      format: date-time
+                      example: 2-11-2023 06:43:00
+                    calories:
+                      type: integer
+                      example: 800
+        responses:
+          '200':
+            description: Activity updated successfully
+
+
