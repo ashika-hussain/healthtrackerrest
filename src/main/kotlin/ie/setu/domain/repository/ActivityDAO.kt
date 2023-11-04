@@ -22,7 +22,7 @@ class ActivityDAO {
     fun findByActivityId(id: Int): Activity?{
         return transaction {
             Activities
-                .select() { Activities.id eq id}
+                .select { Activities.id eq id}
                 .map{mapToActivity(it)}
                 .firstOrNull()
         }
@@ -63,8 +63,8 @@ class ActivityDAO {
     }
 
 
-    fun updateByActivityId(activityId: Int, activityDTO: Activity){
-        transaction {
+    fun updateByActivityId(activityId: Int, activityDTO: Activity): Int{
+        return transaction {
             Activities.update ({
                 Activities.id eq activityId}) {
                 it[description] = activityDTO.description
@@ -75,4 +75,6 @@ class ActivityDAO {
             }
         }
     }
+
+
 }
