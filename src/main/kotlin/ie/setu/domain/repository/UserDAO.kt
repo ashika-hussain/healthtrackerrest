@@ -1,5 +1,6 @@
 package ie.setu.domain.repository
 
+import ie.setu.domain.SaveUser
 import ie.setu.domain.User
 import ie.setu.domain.db.Users
 import ie.setu.utils.mapToUser
@@ -59,5 +60,14 @@ class UserDAO {
                 it[email] = user.email
             }
         }
+    }
+
+    fun save(user: SaveUser) : Int{
+        return transaction {
+            Users.insert {
+                it[name] = user.name
+                it[email] = user.email
+            }
+        } get Users.id
     }
 }
