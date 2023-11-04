@@ -2,6 +2,7 @@ package ie.setu.config
 
 import ie.setu.controllers.UserController
 import ie.setu.controllers.ActivityController
+import ie.setu.controllers.BiometricController
 import ie.setu.controllers.PasswordController
 import ie.setu.utils.jsonObjectMapper
 import io.javalin.Javalin
@@ -32,7 +33,6 @@ class JavalinConfig {
                     post(PasswordController::saveUserDetails)
                 }
             }
-
             path("/api/users") {
                 get(UserController::getAllUsers)
                 post(UserController::addUser)
@@ -40,6 +40,11 @@ class JavalinConfig {
                     get(UserController::getUserByUserId)
                     delete(UserController::deleteUser)
                     patch(UserController::updateUser)
+                    path("biometric"){
+                        get(BiometricController::getByUserId)
+                        delete(BiometricController::deleteByUserId)
+
+                    }
                     path("activities"){
                         get(ActivityController::getActivitiesByUserId)
                         delete(ActivityController::deleteActivityByUserId)
@@ -59,6 +64,14 @@ class JavalinConfig {
                 }
             }
 
+            path("/api/biometrics") {
+                get(BiometricController:: getAll)
+                post(BiometricController:: addBiometric)
+                path("{biometrics-id}"){
+                    get(BiometricController::getById)
+                    delete(BiometricController::deleteById)
+                }
+            }
         }
     }
 

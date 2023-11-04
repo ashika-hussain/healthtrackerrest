@@ -1,9 +1,11 @@
 package ie.setu.utils
 
 import ie.setu.domain.Activity
+import ie.setu.domain.Biometric
 import ie.setu.domain.Password
 import ie.setu.domain.User
 import ie.setu.domain.db.Activities
+import ie.setu.domain.db.Biometrics
 import ie.setu.domain.db.Passwords
 import ie.setu.domain.db.Users
 import org.jetbrains.exposed.sql.ResultRow
@@ -36,4 +38,15 @@ fun mapTOPassword(it:ResultRow) = Password(
     salt = it[Passwords.salt],
     password = it[Passwords.password],
     role =  it[Passwords.role]
+)
+
+fun mapTOBiometrics(it:ResultRow) = Biometric(
+    id = it[Biometrics.id],
+    userId = it[Biometrics.userId],
+    age = it[Biometrics.age],
+    height = it[Biometrics.height],
+    weight = it[Biometrics.weight],
+    bmi = it[Biometrics.bmi],
+    recordedon = it[Biometrics.recordedon]
+
 )
