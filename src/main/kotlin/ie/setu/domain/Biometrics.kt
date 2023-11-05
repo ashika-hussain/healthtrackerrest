@@ -8,6 +8,6 @@ data class Biometric(
     var age: Int,
     var weight: Double,
     var height: Double,
-    val bmi: String,
+    val bmi: Double,
     var recordedon: DateTime
 )
