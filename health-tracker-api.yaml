@@ -286,5 +286,52 @@ paths:
         responses:
           '200':
             description: Activity updated successfully
+  /api/login:
+    post:
+      summary: Login to the system
+      operationId: login
+      requestBody:
+        description: Login to the system
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: testemail@gmail.com
+                password:
+                  type: string
+                  example: password
+
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    type: string
+                    example: admin
+                  result :
+                    type: string
+                    example: Login successful
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    type: string
+                    example: null
+                  result:
+                    type: string
+                    example: Login failed
+
 
 
