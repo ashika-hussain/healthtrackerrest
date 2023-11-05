@@ -9,6 +9,6 @@ object Biometrics : Table("biometrics") {
     val age = integer("age")
     val weight = double("weight")
     val height = double("height")
-    val bmi = varchar("bmi", 100)
+    val bmi = double("bmi")
     val recordedon = datetime("recorded_on")
 }

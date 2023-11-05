@@ -20,7 +20,7 @@ class BiometricsDAO {
                 it[age] = biometrics.age
                 it[weight] = biometrics.weight
                 it[height] = biometrics.height
-                it[bmi] = bmiCalculated.toString()
+                it[bmi] = bmiCalculated
                 it[userId] = biometrics.userId
                 it[recordedon] = biometrics.recordedon
             }
@@ -69,11 +69,11 @@ class BiometricsDAO {
         }
     }
 
-    private fun calculateBmi(weight: Double, height: Double): String? {
-        if (weight <= 0 || height <= 0) {
+    private fun calculateBmi(weight: Double, height: Double): Double {
+        if (weight > 0 || height > 0) {
             val heightInMeters = height / 100.0
-            return (weight / (heightInMeters * heightInMeters)).toString()
+            return "%.1f".format(weight / (heightInMeters * heightInMeters)).toDouble()
         }
-        return null
+        return 0.0
     }
 }
