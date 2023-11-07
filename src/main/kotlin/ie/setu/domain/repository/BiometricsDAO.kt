@@ -48,13 +48,13 @@ class BiometricsDAO {
 
     // Get all BMI entries
     fun getAll(): ArrayList<Biometric> {
-        val bmiList: ArrayList<Biometric> = arrayListOf()
+        val biometricList: ArrayList<Biometric> = arrayListOf()
         transaction {
             Biometrics.selectAll().map {
-                bmiList.add(mapTOBiometrics(it))
+                biometricList.add(mapTOBiometrics(it))
             }
         }
-        return bmiList
+        return biometricList
     }
 
     fun deleteById(bmiId: Int): Int {
