@@ -11,8 +11,8 @@ object BiometricController {
     private var biometricsDAO = BiometricsDAO()
     fun addBiometric(ctx: Context) {
         val biometric: Biometric = jsonToObject(ctx.body())
-        val userId = userDao.findById(biometric.userId)
-        if (userId != null) {
+        val user = userDao.findById(biometric.userId)
+        if (user != null) {
             val bmiId = biometricsDAO.save(biometric)
             biometric.id = bmiId
             ctx.json(biometric)
@@ -23,35 +23,35 @@ object BiometricController {
     }
 
     fun getAll(ctx: Context) {
-        val bimes = biometricsDAO.getAll()
-        if (bimes.size != 0) {
+        val biometrics = biometricsDAO.getAll()
+        if (biometrics.size != 0) {
             ctx.status(200)
         } else {
             ctx.status(404)
         }
-        ctx.json(bimes)
+        ctx.json(biometrics)
     }
 
     fun getById(ctx: Context) {
-        val bimes = biometricsDAO.findById((ctx.pathParam("bmi-id").toInt()))
-        if (bimes != null) {
-            ctx.json(bimes)
+        val biometrics = biometricsDAO.findById((ctx.pathParam("biometrics-id").toInt()))
+        if (biometrics != null) {
+            ctx.json(biometrics)
             ctx.status(200)
         } else {
             ctx.status(404)
         }
     }
     fun deleteById(ctx: Context){
-        if (biometricsDAO.deleteById(ctx.pathParam("bmi-id").toInt()) != 0)
+        if (biometricsDAO.deleteById(ctx.pathParam("biometrics-id").toInt()) != 0)
             ctx.status(204)
         else
             ctx.status(404)
     }
     fun getByUserId(ctx: Context) {
         if (userDao.findById(ctx.pathParam("user-id").toInt()) != null) {
-            val bmies = biometricsDAO.findByUserId(ctx.pathParam("user-id").toInt())
-            if (bmies.isNotEmpty()) {
-                ctx.json(bmies)
+            val biometrics = biometricsDAO.findByUserId(ctx.pathParam("user-id").toInt())
+            if (biometrics.isNotEmpty()) {
+                ctx.json(biometrics)
                 ctx.status(200)
             }
             else{
