@@ -17,7 +17,6 @@ class BiometricsDAO {
 
         return transaction {
             Biometrics.insert {
-                it[age] = biometrics.age
                 it[weight] = biometrics.weight
                 it[height] = biometrics.height
                 it[bmi] = bmiCalculated

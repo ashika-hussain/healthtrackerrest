@@ -67,6 +67,7 @@ class UserDAO {
             Users.insert {
                 it[name] = user.name
                 it[email] = user.email
+                it[dob] = user.dob
             }
         } get Users.id
     }
