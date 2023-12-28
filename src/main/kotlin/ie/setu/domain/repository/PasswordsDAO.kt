@@ -19,7 +19,8 @@ class PasswordsDAO {
     private val userDao = UserDAO()
     class LoginData(
         var role: String?,
-        var result : String?
+        var result : String?,
+        var userId : Int
 
     )
 
@@ -40,7 +41,7 @@ class PasswordsDAO {
     // Authenticate the user by hashing the inputted password using the stored salt,
     // then comparing the generated hashed password to the stored hashed password
     fun authenticate(username: String?, password: String?): LoginData {
-        val loginData = LoginData(role = null, result = "Incorrect Credentials")
+        val loginData = LoginData(role = null, result = "Incorrect Credentials", userId = 0)
         if (username == null || password == null) {
             return loginData
         }
@@ -48,6 +49,7 @@ class PasswordsDAO {
         val securitydetail : Password = getPasswordbyUserId(user.id) ?: return loginData
         return if( BCrypt.checkpw(password , securitydetail.password)) {
             loginData.role = securitydetail.role
+            loginData.userId = user.id
             loginData.result = " Login successfull"
             loginData
         } else

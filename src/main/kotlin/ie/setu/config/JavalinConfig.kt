@@ -1,9 +1,6 @@
 package ie.setu.config
 
-import ie.setu.controllers.UserController
-import ie.setu.controllers.ActivityController
-import ie.setu.controllers.BiometricController
-import ie.setu.controllers.PasswordController
+import ie.setu.controllers.*
 import ie.setu.utils.jsonObjectMapper
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
@@ -45,11 +42,16 @@ class JavalinConfig {
                     path("biometric"){
                         get(BiometricController::getByUserId)
                         delete(BiometricController::deleteByUserId)
-
                     }
                     path("activities"){
                         get(ActivityController::getActivitiesByUserId)
                         delete(ActivityController::deleteActivityByUserId)
+                    }
+                    path("goals"){
+                        post(GoalController::addGoal)
+                        get(GoalController::getGoalsByUserId)
+                        delete(GoalController::deleteGoalsByUserId)
+                        patch(GoalController::updateGoalsByUserId)
                     }
                 }
                 path("/email/{email}"){
@@ -74,6 +76,15 @@ class JavalinConfig {
                     delete(BiometricController::deleteById)
                 }
             }
+
+            path("/api/calorie") {
+                post(CalorieIntakeController::addCalorieIntake)
+                path("{calorie-id}") {
+                    delete(CalorieIntakeController::deleteCalorieIntakesById)
+                    patch(CalorieIntakeController::updateCalorieIntakesById)
+                }
+            }
+
             // The @routeComponent that we added in layout.html earlier will be replaced
             // by the String inside the VueComponent. This means a call to / will load
             // the layout and display our <home-page> component.
@@ -81,6 +92,8 @@ class JavalinConfig {
             get("/users", VueComponent("<user-overview></user-overview>"))
             get("/users/{user-id}", VueComponent("<user-profile></user-profile>"))
             get("/users/{user-id}/activities", VueComponent("<user-activity-overview></user-activity-overview>"))
+            get("/users/{user-id}/biometrics", VueComponent("<user-biometrics-overview></user-biometrics-overview>"))
+            get("/login", VueComponent("<user-login></user-login>"))
         }
     }
 

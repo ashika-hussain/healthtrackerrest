@@ -1,10 +1,18 @@
-<template id="user-activity-overview">
+<template id="user-biometrics-overview">
   <app-layout>
     <div>
-      <h3>Activities list </h3>
+      <h3>Biometrics details</h3>
       <ul>
-        <li v-for="activity in biometrics">
-          {{biometrics.id}}: {{biometrics.height}}
+        <li v-for="biometric in biometrics">
+         <h4>Biometric details as of {{biometric.recordedon}}</h4>
+          <br>
+          Age : {{biometric.age}}
+          <br>
+          Height: {{biometric.height}}
+          <br>
+          Weight: {{biometric.weight}}
+          <br>
+          BMI : {{biometric.bmi}}
         </li>
       </ul>
     </div>
@@ -15,12 +23,12 @@
 app.component("user-biometrics-overview",{
   template: "#user-biometrics-overview",
   data: () => ({
-    activities: [],
+    biometrics: [],
   }),
   created() {
     const userId = this.$javalin.pathParams["user-id"];
-    axios.get(`/api/users/${userId}/biometrics`)
-        .then(res => this.activities = res.data)
+    axios.get(`/api/users/${userId}/biometric`)
+        .then(res => this.biometrics = res.data)
         .catch(() => alert("Error while fetching biometrics"));
   }
 });

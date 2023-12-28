@@ -18,7 +18,6 @@ object PasswordController {
         var password: String?
     )
 
-
     fun login(ctx: Context) {
         val credentials : Credentials = jsonToObject(ctx.body())
         val loginData= passwordsDAO.authenticate(credentials.username,credentials.password)
@@ -32,8 +31,10 @@ object PasswordController {
 
     fun saveUserDetails(ctx: Context){
         val userdetails : SaveUser = jsonToObject(ctx.body())
-        if(passwordsDAO.savePassword(userdetails) > 0)
+        if(passwordsDAO.savePassword(userdetails) > 0) {
+            ctx.json(userdetails)
             ctx.status(201)
+        }
         else
             ctx.status(400)
 
