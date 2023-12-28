@@ -1,5 +1,6 @@
 package ie.setu.controllers
 
+import ie.setu.config.DbConfig
 import ie.setu.domain.Activity
 import ie.setu.domain.User
 import ie.setu.helpers.*
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test
 
 class ActivityControllerTest {
 
+    private val db = DbConfig().getDbConnection()
     private val app = ServerContainer.instance
     private val origin = "http://localhost:" + app.port()
 
@@ -23,7 +25,7 @@ class ActivityControllerTest {
         fun `add an activity when a user exists for it, returns a 201 response`() {
 
             //Arrange - add a user and an associated activity that we plan to do delete on
-            val addedUser: User = jsonToObject(TestUtilities.addUser(validName, validEmail).body.toString())
+            val addedUser: User = jsonToObject(TestUtilities.addUser(validName, validEmail, validdob).body.toString())
 
             val addActivityResponse = TestUtilities.addActivity(
                 activities[0].description, activities[0].duration,
@@ -67,7 +69,7 @@ class ActivityControllerTest {
         @Test
         fun `get all activities by user id when user and activities exists returns 200 response`() {
             //Arrange - add a user and 3 associated activities that we plan to retrieve
-            val addedUser : User = jsonToObject(TestUtilities.addUser(validName, validEmail).body.toString())
+            val addedUser : User = jsonToObject(TestUtilities.addUser(validName, validEmail, validdob).body.toString())
             TestUtilities.addActivity(
                 activities[0].description, activities[0].duration,
                 activities[0].calories, activities[0].started, addedUser.id
@@ -94,7 +96,7 @@ class ActivityControllerTest {
         @Test
         fun `get all activities by user id when no activities exist returns 404 response`() {
             //Arrange - add a user
-            val addedUser : User = jsonToObject(TestUtilities.addUser(validName, validEmail).body.toString())
+            val addedUser : User = jsonToObject(TestUtilities.addUser(validName, validEmail, validdob).body.toString())
 
             //Assert and Act - retrieve the activities by user id
             val response = TestUtilities.retrieveActivitiesByUserId(addedUser.id)
@@ -127,7 +129,7 @@ class ActivityControllerTest {
         @Test
         fun `get activity by activity id when activity exists returns 200 response`() {
             //Arrange - add a user and associated activity
-            val addedUser : User = jsonToObject(TestUtilities.addUser(validName, validEmail).body.toString())
+            val addedUser : User = jsonToObject(TestUtilities.addUser(validName, validEmail, validdob).body.toString())
             val addActivityResponse = TestUtilities.addActivity(
                 activities[0].description,
                 activities[0].duration, activities[0].calories,
@@ -168,7 +170,7 @@ class ActivityControllerTest {
         fun `updating an activity by activity id when it exists, returns 204 response`() {
 
             //Arrange - add a user and an associated activity that we plan to do an update on
-            val addedUser : User = jsonToObject(TestUtilities.addUser(validName, validEmail).body.toString())
+            val addedUser : User = jsonToObject(TestUtilities.addUser(validName, validEmail, validdob).body.toString())
             val addActivityResponse = TestUtilities.addActivity(
                 activities[0].description,
                 activities[0].duration, activities[0].calories,
@@ -215,7 +217,7 @@ class ActivityControllerTest {
         fun `deleting an activity by id when it exists, returns a 204 response`() {
 
             //Arrange - add a user and an associated activity that we plan to do a delete on
-            val addedUser : User = jsonToObject(TestUtilities.addUser(validName, validEmail).body.toString())
+            val addedUser : User = jsonToObject(TestUtilities.addUser(validName, validEmail, validdob).body.toString())
             val addActivityResponse = TestUtilities.addActivity(
                 activities[0].description, activities[0].duration,
                 activities[0].calories, activities[0].started, addedUser.id
@@ -234,7 +236,7 @@ class ActivityControllerTest {
         fun `deleting all activities by userid when it exists, returns a 204 response`() {
 
             //Arrange - add a user and 3 associated activities that we plan to do a cascade delete
-            val addedUser : User = jsonToObject(TestUtilities.addUser(validName, validEmail).body.toString())
+            val addedUser : User = jsonToObject(TestUtilities.addUser(validName, validEmail, validdob).body.toString())
             val addActivityResponse1 = TestUtilities.addActivity(
                 activities[0].description, activities[0].duration,
                 activities[0].calories, activities[0].started, addedUser.id
