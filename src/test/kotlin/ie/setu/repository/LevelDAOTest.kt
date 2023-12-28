@@ -56,9 +56,9 @@ class LevelDAOTest {
             transaction {
                 val userDAO = populateUserTable()
                 val levelDAO = populateLevelTable()
-                assertEquals(level1, levelDAO.findByUserId(1).get(0))
-                assertEquals(level2, levelDAO.findByUserId(3).get(0))
-                assertEquals(level3, levelDAO.findByUserId(2).get(0))
+                assertEquals(level1, levelDAO.findByUserId(3)[0])
+                assertEquals(level2, levelDAO.findByUserId(1)[0])
+                assertEquals(level3, levelDAO.findByUserId(2)[0])
             }
         }
     }

@@ -10,9 +10,9 @@ object TestUtilities {
     private val app = ServerContainer.instance
     private val origin = "http://localhost:" + app.port()
     //helper function to add a test user to the database
-    fun addUser (name: String, email: String): HttpResponse<JsonNode> {
+    fun addUser (name: String, email: String, dob: String): HttpResponse<JsonNode> {
         return Unirest.post("$origin/api/users")
-            .body("{\"name\":\"$name\", \"email\":\"$email\"}")
+            .body("{\"name\":\"$name\", \"email\":\"$email\", \"dob\":\"$dob\"}")
             .asJson()
     }
 
@@ -32,9 +32,9 @@ object TestUtilities {
     }
 
     //helper function to add a test user to the database
-    fun updateUser (id: Int, name: String, email: String): HttpResponse<JsonNode> {
+    fun updateUser (id: Int, name: String, email: String, dob: String): HttpResponse<JsonNode> {
         return Unirest.patch("$origin/api/users/$id")
-            .body("{\"name\":\"$name\", \"email\":\"$email\"}")
+            .body("{\"name\":\"$name\", \"email\":\"$email\", \"dob\":\"$dob\"}")
             .asJson()
     }
 

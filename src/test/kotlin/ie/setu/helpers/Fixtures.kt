@@ -9,10 +9,12 @@ import org.joda.time.DateTime
 const val nonExistingEmail = "112233445566778testUser@xxxxx.xx"
 const val validName = "Test User 1"
 const val validEmail = "testuser1@test.com"
+const val validdob = "15/08/1995"
 
 //Arrange - creating some text fixture data
 const val updatedName = "Updated Name"
 const val updatedEmail = "Updated Email"
+const val updateddob = "Updated Dob"
 
 
 val updatedDescription = "Updated Description"

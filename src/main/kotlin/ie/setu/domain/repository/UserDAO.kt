@@ -32,6 +32,7 @@ class UserDAO {
             Users.insert {
                 it[name] = user.name
                 it[email] = user.email
+                it[dob] = user.dob
             }
         } get Users.id
     }
@@ -58,6 +59,7 @@ class UserDAO {
                 Users.id eq id}) {
                 it[name] = user.name
                 it[email] = user.email
+                it[dob] = user.dob
             }
         }
     }
