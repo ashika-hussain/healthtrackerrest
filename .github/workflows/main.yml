@@ -33,7 +33,7 @@ jobs:
       - name: Maven Verify
         run: mvn -B clean verify
         
-deploy:
+  deploy:
     name: Railway Deploy
     needs: test
     runs-on: ubuntu-latest  
