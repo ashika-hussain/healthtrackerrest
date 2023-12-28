@@ -28,6 +28,28 @@
             </div>
             <input type="email" class="form-control" v-model="formData.email" name="email" placeholder="Email"/>
           </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="input-user-email">Dob</span>
+            </div>
+            <input type="email" class="form-control" v-model="formData.dob" name="dob" placeholder="dd/mm/YYYY"/>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="input-user-email">Password</span>
+            </div>
+            <input type="password" class="form-control" v-model="formData.password" name="password" placeholder="Password"/>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="input-user-email">Role</span>
+            </div>
+            <select id="roles" v-model="formData.role" >
+              <option v-for="role in roles" v-bind:value="role.name">
+                {{role.name}}
+              </option>
+            </select>
+          </div>
         </form>
         <button rel="tooltip" title="Update" class="btn btn-info btn-simple btn-link" @click="addUser()">Add User</button>
       </div>
@@ -55,15 +77,25 @@
   </app-layout>
 </template>
 <script>
+
 app.component("user-overview", {
-  template: "#user-overview",
+
+template: "#user-overview",
   data: () => ({
     users: [],
     formData: [],
     hideForm :true,
+    roles:[],
+    selected: ""
+
   }),
+
   created() {
     this.fetchUsers();
+    this.roles = [
+      {Id :1 , name : "admin"},
+      {Id :2 , name : "candidate"}
+    ]
   },
   methods: {
     fetchUsers: function () {
@@ -86,11 +118,15 @@ app.component("user-overview", {
       }
     },
     addUser: function (){
-      const url = `/api/users`;
+      const url = `/api/login/users`;
       axios.post(url,
           {
             name: this.formData.name,
-            email: this.formData.email
+            email: this.formData.email,
+            dob: this.formData.dob,
+            password: this.formData.password,
+            role: this.formData.role
+
           })
           .then(response => {
             this.users.push(response.data)

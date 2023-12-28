@@ -1,13 +1,7 @@
 package ie.setu.utils
 
-import ie.setu.domain.Activity
-import ie.setu.domain.Biometric
-import ie.setu.domain.Password
-import ie.setu.domain.User
-import ie.setu.domain.db.Activities
-import ie.setu.domain.db.Biometrics
-import ie.setu.domain.db.Passwords
-import ie.setu.domain.db.Users
+import ie.setu.domain.*
+import ie.setu.domain.db.*
 import org.jetbrains.exposed.sql.ResultRow
 
 
@@ -20,7 +14,8 @@ enum class Role(val key: String) {
 fun mapToUser(it: ResultRow) = User(
     id = it[Users.id],
     name = it[Users.name],
-    email = it[Users.email]
+    email = it[Users.email],
+    dob = it[Users.dob]
 )
 
 fun mapToActivity(it: ResultRow) = Activity(
@@ -43,10 +38,33 @@ fun mapTOPassword(it:ResultRow) = Password(
 fun mapTOBiometrics(it:ResultRow) = Biometric(
     id = it[Biometrics.id],
     userId = it[Biometrics.userId],
-    age = it[Biometrics.age],
     height = it[Biometrics.height],
     weight = it[Biometrics.weight],
     bmi = it[Biometrics.bmi],
     recordedon = it[Biometrics.recordedon]
 
+)
+
+fun mapTOCalorieIntake(it: ResultRow) = CalorieIntake(
+    id = it[CalorieIntakes.id],
+    food = it[CalorieIntakes.food],
+    calorie = it[CalorieIntakes.calorie],
+    mealType = it[CalorieIntakes.mealType],
+    number = it[CalorieIntakes.number],
+    userId = it[CalorieIntakes.userId]
+)
+
+fun mapToGoal(it: ResultRow) = Goal(
+    id = it[Goals.id],
+    targetWeight = it[Goals.targetWeight],
+    targetLevel = it[Goals.targetLevel],
+    date = it[Goals.date],
+    userId = it[Goals.userId]
+)
+
+fun mapToLevels(it: ResultRow) = Level(
+    id = it[Levels.id],
+    level = it[Levels.level],
+    date = it[Levels.date],
+    userId = it[Levels.userId]
 )
