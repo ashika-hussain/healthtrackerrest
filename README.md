@@ -1,6 +1,6 @@
 # HealthTracker Application
 
-**Health Tracker app version:** V5.1
+**Health Tracker app version:** V5.0
 
 Health Tracker is a Kotlin-based web application that provides features for tracking user health and wellness. It offers functionalities such as user management, BMI calculation, random health tips, User-sleep Tracker, User-Target, User-sleep duration, and user activity tracking.
 
