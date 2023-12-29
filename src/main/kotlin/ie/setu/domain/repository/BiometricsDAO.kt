@@ -24,7 +24,7 @@ class BiometricsDAO {
                 it[height] = biometrics.height
                 it[bmi] = bmiCalculated
                 it[userId] = biometrics.userId
-                it[recordedon] = DateTime.now()
+                it[recordedon] = biometrics.recordedon
             }
         } get Biometrics.id
     }

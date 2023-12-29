@@ -26,7 +26,7 @@ class CalorieIntakeDAOTest {
     }
 
     @Nested
-    inner class CreateFoodItems {
+    inner class CreateCalorieIntakes {
 
         @Test
         fun `multiple calorieIntakes added to table can be retrieved successfully`() {
@@ -41,7 +41,7 @@ class CalorieIntakeDAOTest {
     }
 
     @Nested
-    inner class ReadFoodItems {
+    inner class ReadCalorieIntakes {
 
         @Test
         fun `get calorieIntake by user id that has no calorieIntakes, results in no record returned`() {
@@ -66,16 +66,15 @@ class CalorieIntakeDAOTest {
     }
 
     @Nested
-    inner class UpdateFoodItems {
+    inner class UpdateCalorieIntakes {
 
         @Test
         fun `updating existing calorieIntake in table results in successful update`() {
             transaction {
-
-                val userDAO = populateUserTable()
+                populateUserTable()
                 val calorieIntakeDAO = populateCalorieIntakeTable()
 
-                val calorieIntake3updated = CalorieIntake(id = 3, food = "A", mealType = "lunch", calorie = 100, number = 100, userId = 3, recordedon = DateTime.now())
+                val calorieIntake3updated = CalorieIntake(id = 3, food = "A", mealType = "lunch", calorie = 100, number = 100, userId = 3, recordedon = DateTime("2020-06-11T05:59:27.258Z") )
                 calorieIntakeDAO.updateById(calorieIntake3updated.id, calorieIntake3updated)
                 assertEquals(mutableListOf(calorieIntake3updated), calorieIntakeDAO.findByUserId(3))
             }
@@ -84,14 +83,14 @@ class CalorieIntakeDAOTest {
     }
 
     @Nested
-    inner class DeleteFoodItems {
+    inner class DeleteCalorieIntakes {
 
         @Test
         fun `deleting calorieIntakes when 1 or more exist for user id results in deletion`() {
             transaction {
 
                 //Arrange - create and populate tables with three users and three calorieIntakes
-                val userDAO = populateUserTable()
+                populateUserTable()
                 val calorieIntakeDAO = populateCalorieIntakeTable()
 
                 //Act & Assert

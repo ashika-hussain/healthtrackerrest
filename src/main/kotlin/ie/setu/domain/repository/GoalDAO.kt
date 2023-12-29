@@ -26,7 +26,7 @@ class GoalDAO {
             Goals.insert {
                 it[targetWeight] = goal.targetWeight
                 it[targetLevel] = goal.targetLevel
-                it[date] = DateTime.now()
+                it[date] = goal.date
                 it[userId] = goal.userId
             } get Goals.id
         }
@@ -38,7 +38,7 @@ class GoalDAO {
                 Goals.userId eq id}) {
                 it[targetWeight] = goalDTO.targetWeight
                 it[targetLevel] = goalDTO.targetLevel
-                it[date] = DateTime.now()
+                it[date] = goalDTO.date
                 it[userId] = goalDTO.userId
             }
         }

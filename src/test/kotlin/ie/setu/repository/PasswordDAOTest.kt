@@ -2,6 +2,7 @@ package ie.setu.repository
 
 import ie.setu.controllers.PasswordController
 import ie.setu.domain.SaveUser
+import ie.setu.domain.db.Levels
 import ie.setu.domain.db.Passwords
 import ie.setu.domain.repository.PasswordsDAO
 import ie.setu.helpers.activities
@@ -37,6 +38,7 @@ class PasswordDAOTest {
         fun `save password for a user`() {
             transaction {
                 SchemaUtils.create(Passwords)
+                SchemaUtils.create(Levels)
                 val passwordsDAO = PasswordsDAO()
                 val result = passwordsDAO.savePassword(userdetail)
                 assertEquals(1, result)
@@ -51,6 +53,7 @@ class PasswordDAOTest {
         fun  `verify authentication with right credentials`(){
             transaction {
                 SchemaUtils.create(Passwords)
+                SchemaUtils.create(Levels)
                 val passwordsDAO = PasswordsDAO()
                 val result = passwordsDAO.savePassword(userdetail)
                 assertEquals(1,result)
@@ -63,6 +66,7 @@ class PasswordDAOTest {
         fun  `verify authentication with wrong credentials`(){
             transaction {
                 SchemaUtils.create(Passwords)
+                SchemaUtils.create(Levels)
                 val passwordsDAO = PasswordsDAO()
                 val result = passwordsDAO.savePassword(userdetail)
                 assertEquals(1,result)

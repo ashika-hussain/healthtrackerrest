@@ -52,7 +52,7 @@ class ActivityDAO {
             Activities.insert {
                 it[description] = activity.description
                 it[duration] = activity.duration
-                it[started] = DateTime.now()
+                it[started] = activity.started
                 it[calories] = activity.calories
                 it[userId] = activity.userId
             }

@@ -77,7 +77,7 @@ class GoalDAOTest {
                 val goalDAO = populateGoalTable()
 
                 val goal3updated = Goal(id = 3, targetWeight = 40,
-                    targetLevel = 2, date = DateTime.now(), userId = 3)
+                    targetLevel = 2, date = DateTime("2020-06-11T05:59:27.258Z"), userId = 3)
                 goalDAO.updateById(goal3updated.id, goal3updated)
                 assertEquals(mutableListOf(goal3updated), goalDAO.findByUserId(3))
             }

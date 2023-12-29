@@ -54,15 +54,15 @@ val userDetails =  arrayListOf(
     SaveUser(name = "Mary Contrary", email = "mary@contrary.com", password = "mary123", role = "candidate", dob = "12/12/1996"),
 )
 val calorieIntakes = arrayListOf<CalorieIntake>(
-    CalorieIntake(id = 1, food = "A",  calorie = 100, mealType = "Breakfast", number = 100, userId = 1, recordedon = DateTime.now()),
-    CalorieIntake(id = 2, food = "B",  calorie = 100, mealType = "Breakfast",number = 100, userId = 2, recordedon = DateTime.now()),
-    CalorieIntake(id = 3, food = "C", calorie = 100, mealType = "Breakfast" ,number = 100, userId = 3, recordedon = DateTime.now())
+    CalorieIntake(id = 1, food = "A",  calorie = 100, mealType = "Breakfast", number = 100, userId = 1, recordedon = DateTime("2020-06-11T05:59:27.258Z")),
+    CalorieIntake(id = 2, food = "B",  calorie = 100, mealType = "Breakfast",number = 100, userId = 2, recordedon = DateTime("2020-06-11T05:59:27.258Z")),
+    CalorieIntake(id = 3, food = "C", calorie = 100, mealType = "Breakfast" ,number = 100, userId = 3, recordedon = DateTime("2020-06-11T05:59:27.258Z"))
 )
 
 val goals = arrayListOf<Goal>(
-    Goal(id = 1, targetWeight = 30, targetLevel = 4, date = DateTime.now(), userId = 1),
-    Goal(id = 2, targetWeight = 70, targetLevel = 2, date = DateTime.now(), userId = 2),
-    Goal(id = 3, targetWeight = 40, targetLevel = 1,  date = DateTime.now(), userId = 3)
+    Goal(id = 1, targetWeight = 30, targetLevel = 4, date = DateTime("2020-06-11T05:59:27.258Z"), userId = 1),
+    Goal(id = 2, targetWeight = 70, targetLevel = 2, date = DateTime("2020-06-11T05:59:27.258Z"), userId = 2),
+    Goal(id = 3, targetWeight = 40, targetLevel = 1,  date = DateTime("2020-06-11T05:59:27.258Z"), userId = 3)
 )
 
 val levels = arrayListOf<Level>(

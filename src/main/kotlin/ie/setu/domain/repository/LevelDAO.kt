@@ -46,7 +46,7 @@ class LevelDAO {
             Levels.update ({
                 Levels.id eq l.id}) {
                 it[level] = l.level
-                it[date] = DateTime.now()
+                it[date] = l.date
                 it[userId] = l.userId
             }
         }
