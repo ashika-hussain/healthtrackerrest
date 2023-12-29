@@ -1,12 +1,15 @@
 package ie.setu.domain.repository
 
 import ie.setu.domain.Activity
+import ie.setu.domain.Level
 import ie.setu.domain.db.Activities
 import ie.setu.utils.mapToActivity
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.joda.time.DateTime
 
 class ActivityDAO {
+    private  val levelDao = LevelDAO()
 
     //Get all the activities in the database regardless of user id
     fun getAll(): ArrayList<Activity> {
@@ -39,11 +42,17 @@ class ActivityDAO {
 
     //Save an activity to the database
     fun save(activity: Activity): Int{
+        if(activity.calories > 500){
+          val level =   levelDao.findByUserId(activity.userId)
+            level[0].level +=1
+            levelDao.updateByUserId(level[0])
+        }
+
        return transaction {
             Activities.insert {
                 it[description] = activity.description
                 it[duration] = activity.duration
-                it[started] = activity.started
+                it[started] = DateTime.now()
                 it[calories] = activity.calories
                 it[userId] = activity.userId
             }

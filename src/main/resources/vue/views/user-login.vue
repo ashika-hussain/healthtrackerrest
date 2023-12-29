@@ -53,3 +53,60 @@ app.component("user-login",{
 
 });
 </script>
+<style>
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #a9dce3;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.card-header {
+  background-color: #7689de;
+  color: white;
+  padding: 15px;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+.card-body {
+  padding: 20px;
+  background-color: #7689aa;
+}
+
+.card-footer {
+  background-color: #7689de;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+i {
+  width: 4em;
+  padding: 10px;
+  background-color: antiquewhite;
+  color: #7689de;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+
+</style>

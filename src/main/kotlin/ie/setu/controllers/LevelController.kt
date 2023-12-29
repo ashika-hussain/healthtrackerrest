@@ -11,14 +11,14 @@ object LevelController {
 
     private val userDao = UserDAO()
     private val levelDao = LevelDAO()
-    fun getBadgesByUserId(ctx: Context) {
+    fun getLevelsByUserId(ctx: Context) {
         if (userDao.findById(ctx.pathParam("user-id").toInt()) != null) {
-            val badges = levelDao.findByUserId(ctx.pathParam("user-id").toInt())
-            if (badges.isNotEmpty()) {
+            val levels = levelDao.findByUserId(ctx.pathParam("user-id").toInt())
+            if (levels.isNotEmpty()) {
                 val mapper = jacksonObjectMapper()
                     .registerModule(JodaModule())
                     .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-                ctx.json(mapper.writeValueAsString(badges))
+                ctx.json(mapper.writeValueAsString(levels))
                 ctx.status(200)
             }
             else {

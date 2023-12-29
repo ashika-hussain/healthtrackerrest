@@ -26,6 +26,7 @@ class CalorieIntakeDAO {
                 it[mealType] = calorieintake.mealType
                 it[number] = calorieintake.number
                 it[userId] = calorieintake.userId
+                it[recordedon]= calorieintake.recordedon
             } get CalorieIntakes.id
         }
     }

@@ -53,6 +53,12 @@ class JavalinConfig {
                         delete(GoalController::deleteGoalsByUserId)
                         patch(GoalController::updateGoalsByUserId)
                     }
+                    path("calories"){
+                        get(CalorieIntakeController::getByUserId)
+                    }
+                    path("levels"){
+                        get(LevelController:: getLevelsByUserId)
+                    }
                 }
                 path("/email/{email}"){
                     get(UserController::getUserByEmail)
@@ -93,6 +99,8 @@ class JavalinConfig {
             get("/users/{user-id}", VueComponent("<user-profile></user-profile>"))
             get("/users/{user-id}/activities", VueComponent("<user-activity-overview></user-activity-overview>"))
             get("/users/{user-id}/biometrics", VueComponent("<user-biometrics-overview></user-biometrics-overview>"))
+            get("/users/{user-id}/calories", VueComponent("<user-calorie-intake></user-calorie-intake>"))
+            get("/users/{user-id}/goals", VueComponent("<user-goals></user-goals>"))
             get("/login", VueComponent("<user-login></user-login>"))
         }
     }

@@ -22,6 +22,13 @@ val updatedDuration = 30.0
 val updatedCalories = 945
 val updatedStarted = DateTime.parse("2020-06-11T05:59:27.258Z")
 
+val updatedtargetweight = 22
+val updatedtargetlevel = 7
+val updateddate = DateTime.parse("2020-06-11T05:59:27.258Z")
+
+
+
+
 val users = arrayListOf(
     User(name = "Alice Wonderland", email = "alice@wonderland.com", id = 1,dob = "12/12/1996"),
     User(name = "Bob Cat", email = "bob@cat.ie", id = 2, dob= "01/02/1994"),
@@ -47,9 +54,9 @@ val userDetails =  arrayListOf(
     SaveUser(name = "Mary Contrary", email = "mary@contrary.com", password = "mary123", role = "candidate", dob = "12/12/1996"),
 )
 val calorieIntakes = arrayListOf<CalorieIntake>(
-    CalorieIntake(id = 1, food = "A",  calorie = 100, mealType = "Breakfast", number = 100, userId = 1),
-    CalorieIntake(id = 2, food = "B",  calorie = 100, mealType = "Breakfast",number = 100, userId = 2),
-    CalorieIntake(id = 3, food = "C", calorie = 100, mealType = "Breakfast" ,number = 100, userId = 3)
+    CalorieIntake(id = 1, food = "A",  calorie = 100, mealType = "Breakfast", number = 100, userId = 1, recordedon = DateTime.now()),
+    CalorieIntake(id = 2, food = "B",  calorie = 100, mealType = "Breakfast",number = 100, userId = 2, recordedon = DateTime.now()),
+    CalorieIntake(id = 3, food = "C", calorie = 100, mealType = "Breakfast" ,number = 100, userId = 3, recordedon = DateTime.now())
 )
 
 val goals = arrayListOf<Goal>(
@@ -63,6 +70,8 @@ val levels = arrayListOf<Level>(
     Level(id = 2,  level = 1, date = DateTime.now(), userId = 1),
     Level(id = 3, level = 3, date = DateTime.now(), userId = 2)
 )
+
+
 
 fun populateUserTable(): UserDAO {
     SchemaUtils.create(Users)

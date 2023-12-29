@@ -17,9 +17,6 @@
                 Users <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/activities">Activities</a>
-            </li>
           </ul>
         </div>
       </nav>
@@ -41,6 +38,6 @@ app.component("app-layout", {template: "#app-layout"});
 
 <style>
 .navbar{
-  background-color: #e3f2fd;
+  background-color: #7689de;
 }
 </style>

@@ -9,6 +9,7 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
+import org.joda.time.DateTime
 
 class GoalDAO {
 
@@ -25,7 +26,7 @@ class GoalDAO {
             Goals.insert {
                 it[targetWeight] = goal.targetWeight
                 it[targetLevel] = goal.targetLevel
-                it[date] = goal.date
+                it[date] = DateTime.now()
                 it[userId] = goal.userId
             } get Goals.id
         }
@@ -37,7 +38,7 @@ class GoalDAO {
                 Goals.userId eq id}) {
                 it[targetWeight] = goalDTO.targetWeight
                 it[targetLevel] = goalDTO.targetLevel
-                it[date] = goalDTO.date
+                it[date] = DateTime.now()
                 it[userId] = goalDTO.userId
             }
         }

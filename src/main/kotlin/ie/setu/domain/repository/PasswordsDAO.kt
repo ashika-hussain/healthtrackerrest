@@ -17,6 +17,7 @@ import org.mindrot.jbcrypt.BCrypt
 class PasswordsDAO {
 
     private val userDao = UserDAO()
+    private  val levelDao = LevelDAO()
     class LoginData(
         var role: String?,
         var result : String?,
@@ -28,6 +29,7 @@ class PasswordsDAO {
         val userId = userDao.save(userDetails)
         val generatedsalt = BCrypt.gensalt(12)
         val generatedpassword = BCrypt.hashpw(userDetails.password,generatedsalt)
+        var currentLevel = levelDao.saveByUserId(userId)
         return transaction {
             Passwords.insert {
                 it[userid] = userId

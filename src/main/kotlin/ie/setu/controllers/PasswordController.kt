@@ -1,10 +1,6 @@
 package ie.setu.controllers
 
-import ie.setu.domain.Password
 import ie.setu.domain.SaveUser
-import ie.setu.domain.User
-import ie.setu.domain.repository.UserDAO
-import org.mindrot.jbcrypt.BCrypt
 import ie.setu.domain.repository.PasswordsDAO
 import ie.setu.utils.jsonToObject
 import io.javalin.http.Context
@@ -12,7 +8,7 @@ import io.javalin.http.Context
 object PasswordController {
 
     private val passwordsDAO = PasswordsDAO()
-    private val userDAO = UserDAO()
+
     class Credentials(
         var username: String?,
         var password: String?
@@ -31,7 +27,8 @@ object PasswordController {
 
     fun saveUserDetails(ctx: Context){
         val userdetails : SaveUser = jsonToObject(ctx.body())
-        if(passwordsDAO.savePassword(userdetails) > 0) {
+        val userid = passwordsDAO.savePassword(userdetails)
+        if(userid > 0) {
             ctx.json(userdetails)
             ctx.status(201)
         }

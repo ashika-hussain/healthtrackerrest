@@ -8,6 +8,9 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.joda.time.DateTime
+import java.util.*
+import kotlin.collections.ArrayList
 
 class BiometricsDAO {
 
@@ -21,7 +24,7 @@ class BiometricsDAO {
                 it[height] = biometrics.height
                 it[bmi] = bmiCalculated
                 it[userId] = biometrics.userId
-                it[recordedon] = biometrics.recordedon
+                it[recordedon] = DateTime.now()
             }
         } get Biometrics.id
     }

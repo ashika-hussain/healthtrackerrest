@@ -93,4 +93,91 @@ object TestUtilities {
             """.trimIndent())
             .asJson()
     }
+
+    fun addBiometric(height: Double, weight: Double, bmi: Double,recordedon: DateTime, userId: Int): HttpResponse<JsonNode> {
+        return Unirest.post("$origin/api/biometrics")
+            .body("""
+                {
+                   "weight":"$weight",
+                   "height":$height,
+                   "bmi":$bmi,
+                   "recordedon":"$recordedon",
+                   "userId":$userId
+                }
+            """.trimIndent())
+            .asJson()
+    }
+    fun retrieveBiometricByBiometricId(id: Int): HttpResponse<JsonNode> {
+        return Unirest.get(origin + "/api/biometrics/${id}").asJson()
+    }
+
+    fun retrieveBiometricsByUserId(id: Int): HttpResponse<JsonNode>{
+        return Unirest.get(origin + "/api/users/${id}/biometric").asJson()
+    }
+
+    //helper function to delete an activity by activity id
+    fun deleteBiometricByBiometricId(id: Int): HttpResponse<String> {
+        return Unirest.delete("$origin/api/biometrics/$id").asString()
+    }
+
+    //helper function to delete an activity by activity id
+    fun deleteBiometricsByUserId(id: Int): HttpResponse<String> {
+        return Unirest.delete("$origin/api/users/$id/biometrics").asString()
+    }
+
+    fun updateBiometric(id:Int, height: Double, weight: Double, bmi: Double,recordedon: DateTime, userId: Int): HttpResponse<JsonNode> {
+        return Unirest.put("$origin/api/biometrics")
+            .body("""
+                {
+                   "weight":"$weight",
+                   "height":$height,
+                   "bmi":$bmi,
+                   "recordedon":"$recordedon",
+                   "userId":$userId
+                }
+            """.trimIndent())
+            .asJson()
+    }
+
+    fun retrivesAllBiometrics(): HttpResponse<JsonNode> {
+        return Unirest.get("$origin/api/biometrics").asJson()
+    }
+
+
+    fun addGoal( targetWeight: Int, targetLevel: Int,
+                   date: DateTime, userId: Int): HttpResponse<JsonNode> {
+        return Unirest.post("$origin/api/users/${userId}/goals")
+            .body("""
+            {
+               
+               "targetWeight":$targetWeight,
+               "targetLevel":$targetLevel,
+               "date":"$date",
+               "userId":$userId
+            }
+        """.trimIndent())
+            .asJson()
+    }
+    fun retrieveGoalsByUserId(id: Int): HttpResponse<JsonNode> {
+        return Unirest.get("$origin/api/users/${id}/goals").asJson()
+    }
+    fun deleteGoalsByUserId(id: Int): HttpResponse<JsonNode> {
+        return Unirest.delete("$origin/api/users/${id}/goals").asJson()
+    }
+    fun updateGoal(id: Int, targetWeight: Int, targetLevel: Int,
+                   date: DateTime, userId: Int): HttpResponse<JsonNode> {
+        return Unirest.post("$origin/api/users/${userId}/goals/$id")
+            .body("""
+            {
+               "id":$id
+               "targetWeight":$targetWeight,
+               "targetLevel":$targetLevel,
+               "date":"$date",
+               "userId":$userId
+            }
+        """.trimIndent())
+            .asJson()
+    }
+
+
 }

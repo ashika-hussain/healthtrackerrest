@@ -16,9 +16,6 @@ class ActivityControllerTest {
     private val app = ServerContainer.instance
     private val origin = "http://localhost:" + app.port()
 
-
-
-
     @Nested
     inner class CreateActivities {
         @Test

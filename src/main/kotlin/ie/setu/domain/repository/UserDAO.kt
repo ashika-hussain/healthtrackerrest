@@ -7,6 +7,9 @@ import ie.setu.utils.mapToUser
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
+/**
+ * Manages the database transactions and returns the result of transaction
+ */
 class UserDAO {
 
     fun getAllUsers(): ArrayList<User> {
@@ -64,6 +67,10 @@ class UserDAO {
         }
     }
 
+    /**
+     * Add a [user] to the User Table
+     * @return the id of the user following the add.
+     */
     fun save(user: SaveUser) : Int{
         return transaction {
             Users.insert {

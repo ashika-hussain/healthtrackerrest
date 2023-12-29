@@ -1,12 +1,14 @@
 package ie.setu.controllers
 
 import ie.setu.domain.User
+import ie.setu.domain.repository.LevelDAO
 import ie.setu.domain.repository.UserDAO
 import ie.setu.utils.jsonToObject
 import io.javalin.http.Context
 
 object UserController {
     private val userDao = UserDAO()
+
 
     fun getAllUsers(ctx: Context) {
         val users = userDao.getAllUsers()

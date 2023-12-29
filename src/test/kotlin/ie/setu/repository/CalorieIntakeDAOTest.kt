@@ -7,6 +7,7 @@ import ie.setu.helpers.populateCalorieIntakeTable
 import ie.setu.helpers.populateUserTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.joda.time.DateTime
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -74,7 +75,7 @@ class CalorieIntakeDAOTest {
                 val userDAO = populateUserTable()
                 val calorieIntakeDAO = populateCalorieIntakeTable()
 
-                val calorieIntake3updated = CalorieIntake(id = 3, food = "A", mealType = "lunch", calorie = 100, number = 100, userId = 3)
+                val calorieIntake3updated = CalorieIntake(id = 3, food = "A", mealType = "lunch", calorie = 100, number = 100, userId = 3, recordedon = DateTime.now())
                 calorieIntakeDAO.updateById(calorieIntake3updated.id, calorieIntake3updated)
                 assertEquals(mutableListOf(calorieIntake3updated), calorieIntakeDAO.findByUserId(3))
             }

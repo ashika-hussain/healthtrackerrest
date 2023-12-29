@@ -51,6 +51,7 @@ fun mapTOCalorieIntake(it: ResultRow) = CalorieIntake(
     calorie = it[CalorieIntakes.calorie],
     mealType = it[CalorieIntakes.mealType],
     number = it[CalorieIntakes.number],
+    recordedon = it[CalorieIntakes.recordedon],
     userId = it[CalorieIntakes.userId]
 )
 
